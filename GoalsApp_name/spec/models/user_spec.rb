@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   
-  subject(:user) do
+  subject(:test_subject) do
     FactoryBot.build(:user, 
     username:"John", 
     password:"asdfasdf")
@@ -36,5 +36,23 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "is_password?(password)" do 
+    #<= let allows us access to test_user so can call things like test_user.username
 
+    #test_user = User.create(username: Faker::Movies::LordOfTheRings.character, password: Faker::Internet.password) **From our factory
+
+    let!(:test_user) { create(:user) } 
+    context "with valid password" do 
+      it "should return true" do 
+        expect(test_user.is_password?(test_user.password)).to be true
+      end
+    end
+
+    context "with invalid password" do
+      it "should return false" do 
+        expect(test_user.is_password?('a')).to be false
+      end
+    end
+  end
+    
 end
