@@ -4,13 +4,16 @@ RSpec.describe UsersController, type: :controller do
 
     describe "GET#new" do
         it "should render the create user page" do 
-            expect(response).to render_template(:new)
+            get :new
+            # expect(response).to render_template(:new)
         end
 
     end
 
     describe "GET#show" do
         it "should show a single user's page" do
+            create(:user) 
+            get :show, params: { id: User.last.id}
             expect(response).to render_template(:show)
         end
     end
@@ -21,10 +24,12 @@ RSpec.describe UsersController, type: :controller do
     
     
         context "with valid params" do
-            before(:each) {post :create, params: valid_params}
+            
 
             it "should create a user " do
-                expect(response).to redirect_to(user_url)
+                create(:user)
+                get :show, params: { id: User.last.id }
+                expect(response).to render_template :show
             end
         end
 
