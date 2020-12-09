@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
     
     it "should return a user if valid credentials" do
       expect(User.find_by_credentials("John", 
-      "asdfasdf")).to eq(user)
+      "asdfasdf")).to eq(@user)
     end
       
     it "should return nil if invalid credentials" do
