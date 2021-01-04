@@ -7,6 +7,16 @@ class UsersController < ApplicationController
     
     
     def show
+        # Params Explained
+        # Path:/users/1  body: user: { username: “Henry” }
+        # params: { id: 1, user: {username: “Henry” } }
+        # user_params: { username: “Henry” }
+        # ------
+        # Path:/users/1  body: user: { username: “Henry”, extra_param: “blah”}
+        # params: { id: 1, user: {username: “Henry”, extra_param: “blah”} }
+        # user_params: { username: “Henry” }
+
+
         @user = User.find(params[:id])
         render :show
     end
